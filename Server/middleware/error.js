@@ -10,6 +10,23 @@ module.exports = (err , req , res, next) => {
         const message = `Resource not fond. Invalid: ${err.path}`;
         err = new ErrorHandler(message , 400);
     }
+
+    if(err.name == 11000){
+        const message = `Duplicate ${object.keys(err.keyValus)} Entered`;
+        err = new ErrorHandler(message , 400);
+    }
+
+
+    if(err.name == "jsonWebTokenError"){
+        const message = `json Web Token is Invalid`;
+        err = new ErrorHandler(message , 400);
+    }
+
+    if(err.name == "TokenExpiredError"){
+        const message = `json Web Token is Expired`;
+        err = new ErrorHandler(message , 400);
+    }
+
     res.status(err.statusCode).json({
         success : false,
         message : err.message,
