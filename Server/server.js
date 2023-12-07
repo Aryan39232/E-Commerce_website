@@ -1,6 +1,7 @@
-const app = require('./app')
 const dotenv = require('dotenv');
+dotenv.config({path : 'server/config/config.env'})
 
+const app = require('./app')
 
 process.on("unhandledRejection" , err => {
     console.log(`Error: ${err.message}`);
@@ -9,7 +10,6 @@ process.on("unhandledRejection" , err => {
     process.exit(1);
 });
 
-dotenv.config({path : 'server/config/config.env'})
 
 
 const PORT = process.env.PORT;
